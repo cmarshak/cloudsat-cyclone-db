@@ -1,0 +1,98 @@
+[project]
+authors = [{name = "Charlie Marshak", email = "charlie.z.marshak@jpl.nasa.gov"}]
+dependencies = []
+name = "cloudsat-cyclone-db"
+requires-python = ">= 3.11"
+version = "0.1.0"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+[tool.pixi.pypi-dependencies]
+cloudsat_cyclone_db = { path = ".", editable = true }
+
+
+[tool.pixi.dependencies]
+jupyterlab = ">=4.6.5,<5"
+jupyter-collaboration = ">=5.0.4,<6"
+numpy = ">=2.5.4,<3"
+scipy = ">=1.18.1,<2"
+scikit-image = ">=0.26.0,<0.27"
+pandas = ">=3.1.1,<4"
+geopandas = ">=1.2.0,<2"
+rasterio = ">=1.5.2,<2"
+xarray = ">=2026.9.0,<2027"
+ruff = ">=0.17.3,<0.18"
+click = ">=8.5.0,<9"
+requests = ">=2.34.2,<3"
+matplotlib = ">=3.11.2,<4"
+
+[tool.pixi.tasks]
+lint = "ruff check ."
+format = "ruff format ."
+build = "python -m cloudsat_cyclone_db.main build"
+serve = "python -m http.server 8000 --bind 127.0.0.1 --directory site"
+
+[tool.ruff]
+line-length = 120
+src = ["src", "tests"]
+exclude = [
+    ".eggs",
+    ".pixi",
+    ".git",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "build",
+    "dist",
+    "site-packages",
+    "notebooks/*",
+]
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = [
+    "F",   # flake8: https://docs.astral.sh/ruff/rules/#flake8-f
+    "E",   # flake8: https://docs.astral.sh/ruff/rules/#flake8-e
+    "I",   # isort: https://docs.astral.sh/ruff/rules/#isort-i
+    "UP",  # pyupgrade: https://docs.astral.sh/ruff/rules/#pyupgrade-up
+    "D",   # pydocstyle: https://docs.astral.sh/ruff/rules/#pydocstyle-d
+    "ANN", # annotations: https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
+    "PTH", # use-pathlib-pth: https://docs.astral.sh/ruff/rules/#flake8-use-pathlib-pth
+    "TRY", # tryceratops
+    "Q",   # flake8-quotes: https://docs.astral.sh/ruff/rules/#flake8-quotes-q
+]
+ignore = [
+    "D100",   # Missing docstring in public module
+    "D101",   # Missing docstring in public class
+    "D102",   # Missing docstring in public method
+    "D103",   # Missing docstring in public function
+    "D104",   # Missing docstring in public package
+    "D105",   # Missing docstring in magic method
+    "D203",   # 1 blank line required before class docstring
+    "D213",   # Multi-line docstring summary should start at the second line
+    "TRY003", # Avoid specifying long messages outside the exception
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+lines-after-imports = 2

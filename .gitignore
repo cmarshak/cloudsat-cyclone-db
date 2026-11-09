@@ -1,0 +1,54 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+
+# vscode
+.vscode/
+.vs_code/
+
+# Mac files
+**/.DS_Store
+
+# Notebook Files
+**/.ipynb_checkpoints/
+**/ipynb_checkpoints/
+
+# Jupyter files
+*.db
+.jupyter/
+
+# Ruff
+.ruff_cache
+
+# pytest files
+.pytest_cache/
+
+# pyenv files
+.python-version
+
+# Rope files
+.ropeproject/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python build / distribution files
+build/
+/dist/
+**/*.egg-info
+
+# env
+.env
+
+# Claude working files
+CLAUDE.md
+claude/
+
+# training outputs / job logs (travel via rsync, not git)
+runs/
+logs/
+
+# raw downloads and build logs (IBTrACS csv); site/data is committed
+data/raw/
